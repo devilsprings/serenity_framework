@@ -16,8 +16,8 @@
         <serenity.maven.version>2.6.0</serenity.maven.version>
         <serenity.cucumber.version>2.6.0</serenity.cucumber.version>
         <encoding>UTF-8</encoding>
-        <tags></tags>
-        <webdriver.base.url></webdriver.base.url>
+        <tags/>
+        <webdriver.base.url/>
     </properties>
     <dependencies>
         <dependency>
@@ -71,12 +71,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.0.13</version>
+            <version>1.2.6</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.6.2</version>
+            <version>3.21.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
