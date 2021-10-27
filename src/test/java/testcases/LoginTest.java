@@ -1,5 +1,6 @@
 package testcases;
 
+import net.serenitybdd.core.annotations.events.AfterScenario;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
@@ -14,18 +15,29 @@ import steps.LoginPageSteps;
 public class LoginTest extends PageObject {
   @Managed WebDriver driver;
 
-  @Steps
-  LoginPageSteps loginPage;
+  @Steps LoginPageSteps loginPage;
 
-  @Steps
-  HomePageSteps homePage;
+  @Steps HomePageSteps homePage;
 
   @Test
-  public void loginTest() {
+  public void validLoginTest() {
     driver.get("https://hrms.cmcglobal.com.vn/");
     loginPage.verifyTitle();
     loginPage.userEnterCredentials();
     homePage.verifyHomepageVisibility();
+  }
+
+  @Test
+  public void invalidLoginTest() {
+    driver.get("https://hrms.cmcglobal.com.vn/");
+    loginPage.verifyTitle();
+    loginPage.userEnterInvalidCredentials();
+    loginPage.checkInvalidCredentialsMessage();
+    homePage.verifyHomepageHidden();
+  }
+
+  @AfterScenario
+  public void testTeardown() {
     driver.close();
     driver.quit();
   }

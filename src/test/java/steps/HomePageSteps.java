@@ -11,4 +11,9 @@ public class HomePageSteps extends PageObject {
   public void verifyHomepageVisibility() {
     homePage.verifyHomepageVisibility();
   }
+
+  public void verifyHomepageHidden() {
+    homePage.verifyHomepageHidden();
+  }
+
 }

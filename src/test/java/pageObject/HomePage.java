@@ -11,4 +11,10 @@ public class HomePage extends PageObject {
                 $(By.xpath("//li[@role='menuitem']/child::a[contains(text(), 'Request Management')]"));
         btnReqMgmt.shouldBeVisible();
     }
+
+    public void verifyHomepageHidden() {
+        WebElementFacade btnReqMgmt =
+                $(By.xpath("//li[@role='menuitem']/child::a[contains(text(), 'Request Management')]"));
+        btnReqMgmt.shouldNotBeVisible();
+    }
 }
