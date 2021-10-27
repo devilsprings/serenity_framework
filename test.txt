@@ -1,0 +1,176 @@
+stages:
+  - test_docker
+  - setup
+  - test
+  - cleanup
+
+
+variables:
+  ARTIFACT_REPORT_PATH: "${CI_PROJECT_DIR}/reports"
+
+Robot_tests_docker:
+  stage: test_docker
+  before_script:
+    - apt-get update
+    - apt-get install -y wget
+    - apt-get install -y xvfb x11vnc fluxbox wmctrl wget ca-certificates fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libdbus-1-3 libgbm1 libgtk-3-0 libnspr4 libnss3 libxcomposite1 libxkbcommon0 libxrandr2 xdg-utils ntpdate openssl
+    - apt-get update
+    - apt-get install -f
+    # - apt-get install -y libxss1 libappindicator1 libindicator7
+    # - rm -rf google-chrome*.deb
+    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -qq
+    # - apt install -y ./google-chrome*.deb
+    - dpkg -i google-chrome*.deb
+    - rm google-chrome*.deb
+    - DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configuration
+    - apt-get install -y xvfb
+    - apt-get -y install xorg xvfb gtk2-engines-pixbuf
+    - apt-get -y install dbus-x11 xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic xfonts-scalable
+    - apt-get -y install imagemagick x11-apps
+    - "Xvfb -ac :99 -screen 0 1280x1024x16 &"
+    - "export DISPLAY=:99.0"
+    - apt -y install python3-pip
+    # - apt -y install nodejs npm
+    - pip install robotframework-seleniumlibrary
+    - pip install robotframework-selenium2library
+    - pip install robotframework
+    - pip install robotframework-pabot
+    # - export PATH="~/.local/bin:$PATH"
+    # - npm install chromedriver
+    # - export PATH="/builds/du8/auto-skillsheet/node_modules/chromedriver/lib/chromedriver/:$PATH"
+    - wget -q https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
+    - unzip chromedriver_linux64.zip
+    - rm chromedriver_linux64.zip
+    - mv chromedriver /usr/local/bin
+    - chmod +x /usr/local/bin/chromedriver
+  script:
+    - EV_USER=ntlinh6 robot -d /tmp/ci-reports/$FOLRDER_REPORT/Login --variable browser:headlesschrome  testcases/Login
+  # image: python:3.9.6
+
+  artifacts:
+    paths:
+      - $ARTIFACT_REPORT_PATH
+    when: always
+
+#===================DOCKER END============================
+
+cache: &global_cache
+  key: cache_data
+  paths:
+    - node_modules/
+  policy: pull-push
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+
+before_script:
+  - rm -rf /tmp/ci-reports/
+  # - export PATH="~/.local/bin:$PATH"
+  # - apt-get update
+  # - apt-get -y install curl
+  # - curl -sL https://deb.nodesource.com/setup_10.x | apt-get update
+  # - apt-get -y install nodejs
+  # - apt-get -y install npm
+  # - npm install
+  - "Xvfb -ac :99 -screen 0 1366×768x24 &"
+  - "export DISPLAY=:99.0"
+  - export FOLRDER_REPORT=$(date +%F%H%M%S)
+
+Setup Test:
+  stage: setup
+  cache:
+    <<: *global_cache
+  script:
+    - pkill -f chrome
+
+Cleanup:
+  stage: cleanup
+  script:
+    - pkill -f chrome
+
+ntlinh6-Login - Regression robotframework:
+  stage: test
+  cache:
+    <<: *global_cache
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - testcases/Login/*
+      when: never
+  script:
+    - EV_USER=ntlinh6 robot -d /tmp/ci-reports/$FOLRDER_REPORT/Login --argumentfile testcase_list_for_ci.arg  testcases/Login
+
+ptvan1-Request_Management - Regression robotframework:
+  stage: test
+  cache:
+    <<: *global_cache
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - testcases/Request_Management/*
+      when: never
+  script:
+    - EV_USER=ptvan1 robot -d /tmp/ci-reports/$FOLRDER_REPORT/Request_Management --argumentfile testcase_list_for_ci.arg  testcases/Request_Management/Main_Function.robot
+
+thlan-Profile - Regression robotframework:
+  stage: test
+  cache:
+    <<: *global_cache
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - testcases/Profile/*
+      when: never
+  script:
+    - EV_USER=thlan robot -d /tmp/ci-reports/$FOLRDER_REPORT/Profile --argumentfile testcase_list_for_ci.arg  testcases/Profile
+
+
+# thlan-Run all - Regression robotframework:
+#   stage: test
+#   cache:
+#     <<: *global_cache
+#   rules:
+#         - if: '$CI_PIPELINE_SOURCE == "schedule"'
+#   script:
+#     - ./run_ci.sh
+
+
+Nightwatch - Demo Regression:
+  stage: test
+  cache:
+    <<: *global_cache
+  before_script:
+    #workaround ??
+    - npm install
+    - export PATH="./node_modules/chromedriver/lib/chromedriver/:$PATH"
+    - cd nightwatch
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - nightwatch/*
+      when: never
+  script:
+    - nightwatch -e chrome
+
+Newman - Demo Regression:
+  stage: test
+  cache:
+    <<: *global_cache
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - newman/*
+      when: never
+  before_script:
+    - cd newman
+  script:
+    - newman run QApractice.postman_collection.json
