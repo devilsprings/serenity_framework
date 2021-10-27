@@ -1,30 +1,32 @@
 package testcases;
 
 import net.serenitybdd.core.pages.PageObject;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.Steps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import steps.HomePageSteps;
+import steps.LoginPageSteps;
 
 @RunWith(SerenityRunner.class)
 public class LoginTest extends PageObject {
   @Managed WebDriver driver;
 
+  @Steps
+  LoginPageSteps loginPage;
+
+  @Steps
+  HomePageSteps homePage;
+
   @Test
   public void loginTest() {
-    driver.get("http://192.168.67.35");
-    //    driver.findElement(By.id("normal_login_username")).sendKeys("ptqanh");
-    //    driver.findElement(By.id("normal_login_password")).sendKeys("123456a@");
-    //    driver.findElement(By.xpath("//button[@type='submit']")).click();
-    WebElementFacade txtUsername = $(By.id("normal_login_username"));
-    WebElementFacade txtPassword = $(By.id("normal_login_password"));
-    WebElementFacade btnReqMgmt =
-        $(By.xpath("//li[@role='menuitem']/child::a[contains(text(), 'Request Management')]"));
-    txtUsername.typeAndTab("ptqanh");
-    txtPassword.typeAndEnter("123456a@");
-    btnReqMgmt.shouldBeVisible();
+    driver.get("https://hrms.cmcglobal.com.vn/");
+    loginPage.verifyTitle();
+    loginPage.userEnterCredentials();
+    homePage.verifyHomepageVisibility();
+    driver.close();
+    driver.quit();
   }
 }
