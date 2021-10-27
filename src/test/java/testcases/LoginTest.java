@@ -14,15 +14,17 @@ public class LoginTest extends PageObject {
   @Managed WebDriver driver;
 
   @Test
-  public void loginTest() throws InterruptedException {
+  public void loginTest() {
     driver.get("http://192.168.67.35");
-//    driver.findElement(By.id("normal_login_username")).sendKeys("ptqanh");
-//    driver.findElement(By.id("normal_login_password")).sendKeys("123456a@");
-//    driver.findElement(By.xpath("//button[@type='submit']")).click();
-    WebElementFacade txtUsername=$(By.id("normal_login_username"));
-    WebElementFacade txtPassword=$(By.id("normal_login_password"));
+    //    driver.findElement(By.id("normal_login_username")).sendKeys("ptqanh");
+    //    driver.findElement(By.id("normal_login_password")).sendKeys("123456a@");
+    //    driver.findElement(By.xpath("//button[@type='submit']")).click();
+    WebElementFacade txtUsername = $(By.id("normal_login_username"));
+    WebElementFacade txtPassword = $(By.id("normal_login_password"));
+    WebElementFacade btnReqMgmt =
+        $(By.xpath("//li[@role='menuitem']/child::a[contains(text(), 'Request Management')]"));
     txtUsername.typeAndTab("ptqanh");
     txtPassword.typeAndEnter("123456a@");
-    Thread.sleep(3000);
+    btnReqMgmt.shouldBeVisible();
   }
 }
