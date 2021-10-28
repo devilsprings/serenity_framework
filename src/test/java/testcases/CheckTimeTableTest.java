@@ -16,9 +16,8 @@ import steps.LoginPageSteps;
 
 @RunWith(SerenityParameterizedRunner.class)
 @UseTestDataFrom(value = "data/data.csv")
-public class LoginTest extends PageObject {
+public class CheckTimeTableTest extends PageObject {
   private String username;
-  private String password;
   private Integer expectedCheckInTime;
   private Integer expectedCheckOutTime;
 
@@ -34,14 +33,6 @@ public class LoginTest extends PageObject {
 
   public void setUsername(String username) {
     this.username = username;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
   }
 
   public Integer getExpectedCheckInTime() {
@@ -62,6 +53,7 @@ public class LoginTest extends PageObject {
 
   @Test
   public void validLoginTest() {
+    String password = System.getenv("HRMS_PASS");
     driver.get("https://hrms.cmcglobal.com.vn/");
     driver.manage().window().maximize();
     loginPage.verifyTitle();
