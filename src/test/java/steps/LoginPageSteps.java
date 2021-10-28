@@ -13,17 +13,7 @@ public class LoginPageSteps extends PageObject {
   }
 
   @Step("User enter username and password")
-  public void userEnterCredentials() {
-    loginPage.userEnterCredentials();
-  }
-
-  @Step("User enter invalid username and password")
-  public void userEnterInvalidCredentials() {
-    loginPage.userEnterInvalidCredentials();
-  }
-
-  @Step("Check error message")
-  public void checkInvalidCredentialsMessage() {
-    loginPage.checkErrorMessage();
+  public void userEnterCredentials(String username, String password) {
+    loginPage.userEnterCredentials(username, password);
   }
 }

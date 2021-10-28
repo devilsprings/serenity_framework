@@ -12,23 +12,10 @@ public class LoginPage extends PageObject {
     Assert.assertEquals(title, "Human Resource Management System");
   }
 
-  public void userEnterCredentials() {
+  public void userEnterCredentials(String username, String password) {
     WebElementFacade txtUsername = $(By.id("normal_login_username"));
     WebElementFacade txtPassword = $(By.id("normal_login_password"));
-    txtUsername.typeAndTab("dqhieu");
-    txtPassword.typeAndEnter("Suzume0513");
-  }
-
-  public void userEnterInvalidCredentials() {
-    WebElementFacade txtUsername = $(By.id("normal_login_username"));
-    WebElementFacade txtPassword = $(By.id("normal_login_password"));
-    txtUsername.typeAndTab("ptqanh");
-    txtPassword.typeAndEnter("123456a@");
-  }
-
-  public void checkErrorMessage() {
-    WebElementFacade labelInvalidCredentials = $(By.xpath("//span[@class='ant-alert-message']"));
-    labelInvalidCredentials.shouldBeVisible();
-    Assert.assertTrue(labelInvalidCredentials.containsText("Invalid credentials"));
+    txtUsername.typeAndTab(username);
+    txtPassword.typeAndEnter(password);
   }
 }
