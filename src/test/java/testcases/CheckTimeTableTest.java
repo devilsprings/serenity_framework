@@ -4,9 +4,9 @@ import net.serenitybdd.core.annotations.events.AfterScenario;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.junit.annotations.UseTestDataFrom;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +20,7 @@ public class CheckTimeTableTest extends PageObject {
   private String username;
   private Integer expectedCheckInTime;
   private Integer expectedCheckOutTime;
+  public static String password;
 
   @Managed WebDriver driver;
 
@@ -52,8 +53,8 @@ public class CheckTimeTableTest extends PageObject {
   }
 
   @Test
-  public void validLoginTest() {
-    String password = System.getenv("HRMS_PASS");
+  public void checkLateComing() {
+    password = System.getenv("HRMS_PASS");
     driver.get("https://hrms.cmcglobal.com.vn/");
     driver.manage().window().maximize();
     loginPage.verifyTitle();
@@ -61,20 +62,36 @@ public class CheckTimeTableTest extends PageObject {
     homePage.verifyHomepageVisibility();
     homePage.gotoCheckInOutTimeTab();
     homePage.getTodayCheckInTime();
-    homePage.getTodayCheckOutTime();
-    printResult();
+    printCheckInResult();
   }
 
-  @Step
-  public void printResult() {
+  @Test
+  public void checkEarlyLeaving() {
+    password = System.getenv("HRMS_PASS");
+    driver.get("https://hrms.cmcglobal.com.vn/");
+    driver.manage().window().maximize();
+    loginPage.verifyTitle();
+    loginPage.userEnterCredentials(username, password);
+    homePage.verifyHomepageVisibility();
+    homePage.gotoCheckInOutTimeTab();
+    homePage.getTodayCheckOutTime();
+    printCheckOutResult();
+  }
+
+  public void printCheckInResult() {
+    System.out.println("Today Check-in time: " + HomePage.checkInTime);
+    System.out.println("Expected Check-in time: 0" + expectedCheckInTime);
     System.out.println(
-        "Today Checkin - Checkout time: " + HomePage.checkInTime + " - " + HomePage.checkOutTime);
-    System.out.println(
-        "Expected Checkin - Checkout time: 0" + expectedCheckInTime + " - " + expectedCheckOutTime);
-    System.out.println(
-        "Late Coming: " + (Integer.parseInt(HomePage.checkInTime) > expectedCheckInTime));
+        "Late coming: " + (Integer.parseInt(HomePage.checkInTime) > expectedCheckInTime));
+    Assert.assertFalse(Integer.parseInt(HomePage.checkInTime) > expectedCheckInTime);
+  }
+
+  public void printCheckOutResult() {
+    System.out.println("Today Check-out time: " + HomePage.checkOutTime);
+    System.out.println("Expected Check-out time: " + expectedCheckOutTime);
     System.out.println(
         "Early leaving: " + (Integer.parseInt(HomePage.checkOutTime) < expectedCheckOutTime));
+    Assert.assertFalse(Integer.parseInt(HomePage.checkOutTime) < expectedCheckOutTime);
   }
 
   @AfterScenario
