@@ -8,4 +8,4 @@ COPY    pom.xml .
 COPY    serenity.properties .
 COPY    src .
 
-RUN     mvn clean verify
+CMD     [mvn clean verify]
