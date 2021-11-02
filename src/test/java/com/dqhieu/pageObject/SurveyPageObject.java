@@ -1,10 +1,10 @@
-package com.dqhieu.test.pageObject;
+package com.dqhieu.pageObject;
 
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-public class SurveyPage extends PageObject {
+public class SurveyPageObject extends PageObject {
   public static String message;
 
   public void answerSurvey(String answer) {

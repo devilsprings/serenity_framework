@@ -1,11 +1,11 @@
-package com.dqhieu.test.stepDefinition;
+package com.dqhieu.stepDefinition;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
-import com.dqhieu.test.pageObject.SurveyPage;
-import com.dqhieu.test.steps.SurveySteps;
+import com.dqhieu.pageObject.SurveyPageObject;
+import com.dqhieu.steps.SurveySteps;
 
 public class demoTest {
   @Steps SurveySteps surveySteps;
@@ -24,6 +24,6 @@ public class demoTest {
   @Then("User should see {string} message")
   public void userCheckReturnedMessage(String message) {
     surveySteps.checkMessage();
-    Assert.assertEquals(SurveyPage.message, message);
+    Assert.assertEquals(SurveyPageObject.message, message);
   }
 }

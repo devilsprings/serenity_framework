@@ -1,11 +1,11 @@
-package com.dqhieu.test.steps;
+package com.dqhieu.steps;
 
-import com.dqhieu.test.pageObject.SurveyPage;
+import com.dqhieu.pageObject.SurveyPageObject;
 import net.serenitybdd.core.pages.PageObject;
 
 public class SurveySteps extends PageObject {
 
-  SurveyPage surveyPage;
+  SurveyPageObject surveyPage;
 
   public void selectAnswer(String answer) {
     surveyPage.answerSurvey(answer);
