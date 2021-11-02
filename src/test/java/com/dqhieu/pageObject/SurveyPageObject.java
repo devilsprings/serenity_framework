@@ -8,9 +8,9 @@ public class SurveyPageObject extends PageObject {
   public static String message;
 
   public void answerSurvey() {
-    WebElementFacade btnAnswerGood =
+    WebElementFacade btnAnswer =
         $(By.xpath("//span[contains(text(), 'Good')]"));
-    btnAnswerGood.waitUntilVisible().click();
+    btnAnswer.waitUntilVisible().click();
   }
 
   public void submitAnswer() {
