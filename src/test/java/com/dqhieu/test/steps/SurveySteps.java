@@ -1,7 +1,7 @@
-package steps;
+package com.dqhieu.test.steps;
 
+import com.dqhieu.test.pageObject.SurveyPage;
 import net.serenitybdd.core.pages.PageObject;
-import pageObject.SurveyPage;
 
 public class SurveySteps extends PageObject {
 

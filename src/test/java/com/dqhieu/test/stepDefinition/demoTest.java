@@ -1,15 +1,14 @@
-package stepDefinition;
+package com.dqhieu.test.stepDefinition;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
-import pageObject.SurveyPage;
-import steps.SurveySteps;
+import com.dqhieu.test.pageObject.SurveyPage;
+import com.dqhieu.test.steps.SurveySteps;
 
 public class demoTest {
-  @Steps
-  SurveySteps surveySteps;
+  @Steps SurveySteps surveySteps;
 
   @Given("User go to surveymonkey page")
   public void userGotoSurveyPage() {
@@ -22,9 +21,9 @@ public class demoTest {
     surveySteps.submitAnswer();
   }
 
-  @Then("User should see \"Have a nice day.\" message")
-  public void userCheckReturnedMessage() throws Throwable {
+  @Then("User should see {string} message")
+  public void userCheckReturnedMessage(String message) {
     surveySteps.checkMessage();
-    Assert.assertEquals(SurveyPage.message, "Have a nice day.");
+    Assert.assertEquals(SurveyPage.message, message);
   }
 }
