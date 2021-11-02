@@ -7,8 +7,8 @@ public class SurveySteps extends PageObject {
 
   SurveyPageObject surveyPage;
 
-  public void selectAnswer(String answer) {
-    surveyPage.answerSurvey(answer);
+  public void selectAnswer() {
+    surveyPage.answerSurvey();
   }
 
   public void submitAnswer() {

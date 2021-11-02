@@ -16,15 +16,15 @@ public class demoTest {
     surveySteps.openWebPage();
   }
 
-  @When("User select {string} and submit the answer")
-  public void userChooseTheAnswer(String answer) {
-    surveySteps.selectAnswer(answer);
+  @When("User select Good and submit the answer")
+  public void userChooseTheAnswer() {
+    surveySteps.selectAnswer();
     surveySteps.submitAnswer();
   }
 
-  @Then("User should see {string} message")
-  public void userCheckReturnedMessage(String message) {
+  @Then("User should see Have a nice day message")
+  public void userCheckReturnedMessage() {
     surveySteps.checkMessage();
-    Assert.assertEquals(SurveyPageObject.message, message);
+    Assert.assertEquals(SurveyPageObject.message, "Have a nice day.");
   }
 }
