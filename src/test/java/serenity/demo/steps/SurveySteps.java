@@ -1,6 +1,6 @@
-package com.dqhieu.steps;
+package serenity.demo.steps;
 
-import com.dqhieu.pageObject.SurveyPageObject;
+import serenity.demo.pageObject.SurveyPageObject;
 import net.serenitybdd.core.pages.PageObject;
 
 public class SurveySteps extends PageObject {
@@ -19,7 +19,7 @@ public class SurveySteps extends PageObject {
     surveyPage.checkMessage();
   }
 
-    public void openWebPage() {
-        surveyPage.open();
-    }
+  public void openWebPage() {
+    surveyPage.open();
+  }
 }

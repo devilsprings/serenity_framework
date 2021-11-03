@@ -1,4 +1,4 @@
-package com.dqhieu.testRunner;
+package serenity.demo.testRunner;
 
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
@@ -8,6 +8,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     plugin = {"pretty"},
     features = "src/test/resources/features/demo.feature",
-    glue = {"com.dqhieu"})
+    glue = {"serenity.demo"})
 
 public class DemoTestSuite {}
