@@ -7,8 +7,8 @@ public class SurveySteps extends PageObject {
 
   SurveyPageObject surveyPage;
 
-  public void selectAnswer() {
-    surveyPage.answerSurvey();
+  public void selectAnswer(String answer) {
+    surveyPage.answerSurvey(answer);
   }
 
   public void submitAnswer() {
@@ -21,5 +21,13 @@ public class SurveySteps extends PageObject {
 
   public void openWebPage() {
     surveyPage.open();
+  }
+
+  public void goToPreviousPage() {
+    surveyPage.goToPreviousPage();
+  }
+
+  public void checkBtnStatus(String answer) {
+    surveyPage.verifyBtnStatus(answer);
   }
 }

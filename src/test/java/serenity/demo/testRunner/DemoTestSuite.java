@@ -8,6 +8,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     plugin = {"pretty"},
     features = "src/test/resources/features/demo.feature",
-    glue = {"serenity.demo"})
+    glue = "serenity.demo")
 
 public class DemoTestSuite {}

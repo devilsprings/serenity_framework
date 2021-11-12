@@ -1,5 +1,6 @@
 package serenity.demo.stepDefinition;
 
+import org.jruby.RubyProcess;
 import serenity.demo.pageObject.SurveyPageObject;
 import serenity.demo.steps.SurveySteps;
 import io.cucumber.java.en.And;
@@ -17,9 +18,9 @@ public class demoTest {
     surveySteps.openWebPage();
   }
 
-  @When("I select Good")
-  public void userChooseTheAnswer() {
-    surveySteps.selectAnswer();
+  @When("I select {string}")
+  public void userChooseTheAnswer(String answer) {
+    surveySteps.selectAnswer(answer);
   }
 
   @And("submit the answer")
@@ -27,9 +28,29 @@ public class demoTest {
     surveySteps.submitAnswer();
 
   }
-  @Then("I should see Have a nice day message")
-  public void userCheckReturnedMessage() {
+
+  @Then("I should see {string} message")
+  public void userCheckReturnedMessage(String surveyMessage) {
     surveySteps.checkMessage();
-    Assert.assertEquals(SurveyPageObject.message, "Have a nice day.");
+    Assert.assertEquals(SurveyPageObject.message, surveyMessage);
+  }
+
+  @When("I go to previous page")
+  public void userGotoPreviousPage() {
+    surveySteps.goToPreviousPage();
+  }
+
+  @Then("Button {string} should be clicked")
+  public void checkBtnStatusClicked(String button) {
+    surveySteps.checkBtnStatus(button);
+    Assert.assertEquals(SurveyPageObject.btnStatus, "true");
+    System.out.println(String.format("Button %s clicked :", button) + SurveyPageObject.btnStatus);
+  }
+
+  @And("Button {string} should not be clicked")
+  public void checkBtnStatus(String button) {
+    surveySteps.checkBtnStatus(button);
+    Assert.assertEquals(SurveyPageObject.btnStatus, "false");
+    System.out.println(String.format("Button %s clicked :", button) + SurveyPageObject.btnStatus);
   }
 }
