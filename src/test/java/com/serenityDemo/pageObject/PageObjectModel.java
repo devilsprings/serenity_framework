@@ -1,19 +1,17 @@
-package com.dqhieu.pageObject;
+package com.serenityDemo.pageObject;
 
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-public class SurveyPageObject extends PageObject {
+public class PageObjectModel extends PageObject {
   public static String message;
 
-  public void answerSurvey(String answer) {
+  public void answerGoodBtn() {
     WebElementFacade btnAnswer =
         $(
             By.xpath(
-                String.format(
-                    "//span[contains(@class, 'radio-button-label') and contains(text(), '%s')]",
-                    answer)));
+                    "//span[contains(@class, 'radio-button-label') and contains(text(), 'Good')]"));
     btnAnswer.waitUntilVisible().click();
   }
 
