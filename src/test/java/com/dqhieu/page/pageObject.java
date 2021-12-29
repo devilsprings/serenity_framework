@@ -1,11 +1,11 @@
-package com.dqhieu.pageObject;
+package com.dqhieu.page;
 
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-public class SurveyPageObject extends PageObject {
-  public static String message;
+public class pageObject extends PageObject {
+
 
   public void answerSurvey(String answer) {
     WebElementFacade btnAnswer =
@@ -22,9 +22,22 @@ public class SurveyPageObject extends PageObject {
     btnNext.click();
   }
 
-  public String checkMessage() {
+  public String checkSubmitSuccessfulMessage() {
     WebElementFacade lblHaveANiceDay = $(By.xpath("//div[@role='heading']/div"));
-    message = lblHaveANiceDay.waitUntilVisible().getText();
-    return message;
+    System.out.println(lblHaveANiceDay.waitUntilVisible().getText());
+    return lblHaveANiceDay.waitUntilVisible().getText();
+  }
+
+  public void goToThePrevPage() {
+    WebElementFacade btnPrev = $(By.xpath("//button[contains(text(), 'Prev')]"));
+    btnPrev.click();
+  }
+
+  public String getBtnStatus(String button) {
+    WebElementFacade btnStatus =
+        $(
+            By.xpath(
+                String.format("//span[contains(text(), '%s')]/../preceding-sibling::input", button)));
+    return btnStatus.getAttribute("aria-checked");
   }
 }
