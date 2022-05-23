@@ -9,42 +9,46 @@ import org.junit.Assert;
 import com.dqhieu.page.pageObject;
 
 public class testSteps {
-  @Steps
-  pageObject pageObject;
+  @Steps pageObject pageObject;
 
-  @Given("I open the survey Monkey page")
-  public void iOpenTheSurveyPage() {
+  @Given("I go to mobile menu")
+  public void iGoToMobileMenu() {
     pageObject.open();
+    pageObject.goToMobileMenu();
   }
 
-  @When("I choose answer {string}")
-  public void iChooseTheAnswer(String answer) {
-    pageObject.answerSurvey(answer);
+  @And("I go to Mobile Rate Plans menu")
+  public void iGoToMobileRatePlansMenu() {
+    pageObject.goToMobileRatePlan();
   }
 
-  @And("I submit my answer")
-  public void iSubmitMyAnswer() {
-    pageObject.submitAnswer();
+  @When("I select Rs600 plan")
+  public void iSelectRs600Plan() {
+    pageObject.clickGetRs600Plan();
   }
 
-  @Then("I should see {string} message display")
-  public void iCheckForSubmitSuccessfulMessage(String message) {
-    Assert.assertEquals(pageObject.checkSubmitSuccessfulMessage(), message);
+  @Then("I select Foreigner at Identity Verification screen")
+  public void iSelectForeignerAtIdentityVerificationScreen() {
+    pageObject.selectForeignerIdentityVerificationScr();
   }
 
-  @Then("I click Prev button")
-  public void iClickPrevButton() {
-    pageObject.goToThePrevPage();
+  @And("I enter passport number as {string}")
+  public void iEnterPassportNumberAs(String passportNumber) {
+    pageObject.inputPassportNumber(passportNumber);
   }
 
-  @And("The {string} button should be clicked")
-  public void theBadButtonShouldBeClicked(String button) {
-    Assert.assertEquals(pageObject.getBtnStatus(button), "true");
+  @And("I click continue button")
+  public void iClickContinueButton() {
+    pageObject.clickContinueButton();
   }
 
-  @And("The {string} button and {string} button should not be clicked")
-  public void theButtonShouldNotBeClicked(String button1, String button2) {
-    Assert.assertEquals(pageObject.getBtnStatus(button1), "false");
-    Assert.assertEquals(pageObject.getBtnStatus(button2), "false");
+  @And("I enter mobile number as {string}")
+  public void iEnterMobileNumberAs(String mobileNumber) {
+    pageObject.inputMobileNumber(mobileNumber);
+  }
+
+  @Then("I should be able to see OTP Verification popup")
+  public void iShouldBeAbleToSeeOTPVerificationPopup() {
+    Assert.assertTrue(pageObject.checkOTPPopUpVisibility());
   }
 }
