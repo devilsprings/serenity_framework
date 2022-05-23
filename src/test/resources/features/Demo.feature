@@ -9,5 +9,5 @@ Scenario: Get mobile plan
   And I enter passport number as "C9342929"
   And I click continue button
   And I enter mobile number as "0768425364"
-  When I click continue button
+  When I click continue button again
   Then I should be able to see OTP Verification popup

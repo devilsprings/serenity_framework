@@ -42,6 +42,11 @@ public class testSteps {
     pageObject.clickContinueButton();
   }
 
+  @And("I click continue button again")
+  public void iClickContinueButtonAgain() {
+    pageObject.clickContinueButtonAgain();
+  }
+
   @And("I enter mobile number as {string}")
   public void iEnterMobileNumberAs(String mobileNumber) {
     pageObject.inputMobileNumber(mobileNumber);

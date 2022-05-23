@@ -4,6 +4,7 @@ import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 
 public class pageObject extends PageObject {
@@ -16,18 +17,19 @@ public class pageObject extends PageObject {
 
   public void goToMobileRatePlan() {
     WebElementFacade btnMobileRatePlan = $(By.xpath("//a[contains(text(), 'Mobile Rate Plans')]"));
-    scrollIntoView(getDriver(), btnMobileRatePlan);
+//    scrollIntoView(getDriver(), btnMobileRatePlan);
     btnMobileRatePlan.waitUntilVisible().click();
   }
 
   public void clickNextButtonSelectPlanScreen() {
     WebElementFacade btnNext = $(By.xpath("//a[@class='flex-next']"));
-    scrollIntoView(getDriver(), btnNext);
+//    scrollIntoView(getDriver(), btnNext);
     btnNext.waitUntilVisible().click();
   }
 
   public void clickGetRs600Plan() {
     WebElementFacade btnGetPlan600 = $(By.id("PostpaidPlan600"));
+    scrollByCoordinates(getDriver());
     while (!checkRs600PlanVisibility()) {
       clickNextButtonSelectPlanScreen();
       if (checkRs600PlanVisibility()) {
@@ -59,7 +61,7 @@ public class pageObject extends PageObject {
   }
 
   public void selectForeignerIdentityVerificationScr() {
-    WebElementFacade radioBtnForeigner = $(By.id("ends-with-checkbox"));
+    WebElementFacade radioBtnForeigner = $(By.xpath("//label[contains(text(), 'Foreigner')]"));
     radioBtnForeigner.waitUntilVisible().click();
   }
 
@@ -69,13 +71,18 @@ public class pageObject extends PageObject {
   }
 
   public void inputMobileNumber(String mobileNumber) {
-    WebElementFacade passportField = $(By.id("enter-mobile-num"));
-    passportField.waitUntilVisible().type(mobileNumber);
+    WebElementFacade mobileNumberField = $(By.id("o2a-step2-enter-mobile-num"));
+    mobileNumberField.waitUntilEnabled().type(mobileNumber);
   }
 
   public void clickContinueButton( ) {
-    WebElementFacade passportField = $(By.id("continue-button"));
-    passportField.click();
+    WebElementFacade continueBtn = $(By.id("continue-button"));
+    continueBtn.click();
+  }
+
+  public void clickContinueButtonAgain( ) {
+    WebElementFacade continueBtn2 = $(By.id("continue-button-2"));
+    continueBtn2.click();
   }
 
   public static void scrollIntoView(WebDriver driver, WebElementFacade we) {
@@ -86,5 +93,11 @@ public class pageObject extends PageObject {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void scrollByCoordinates(WebDriver driver) {
+    //scroll with Javascript Executor
+    JavascriptExecutor j = (JavascriptExecutor) driver;
+    j.executeScript("window.scrollBy(" + 0 + ", " + 650 + ");");
   }
 }
