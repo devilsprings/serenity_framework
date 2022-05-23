@@ -1,4 +1,4 @@
-package com.dqhieu.steps;
+package com.thtung.steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Assert;
-import com.dqhieu.page.pageObject;
+import com.thtung.page.pageObject;
 
 public class testSteps {
   @Steps pageObject pageObject;
@@ -50,5 +50,10 @@ public class testSteps {
   @Then("I should be able to see OTP Verification popup")
   public void iShouldBeAbleToSeeOTPVerificationPopup() {
     Assert.assertTrue(pageObject.checkOTPPopUpVisibility());
+  }
+
+  @And("I click select plan button")
+  public void iClickSelectPlanButton() {
+    pageObject.clickSelectPlanButton();
   }
 }
