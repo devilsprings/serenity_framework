@@ -10,4 +10,4 @@ Scenario: Verify result
   And Enter number a as "11"
   And Enter number b as "22"
   Then Click get total
-#  And Verify get total
+  And Verify get total
