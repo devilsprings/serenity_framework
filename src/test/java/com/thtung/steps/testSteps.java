@@ -61,4 +61,51 @@ public class testSteps {
   public void iClickSelectPlanButton() {
     pageObject.clickSelectPlanButton();
   }
+
+  @Given("Go to Anhtester web")
+  public void goToAnhtesterWeb() {
+    pageObject.open();
+  }
+
+  @And("Select input form")
+  public void selectInputForm() {
+    pageObject.clickSelectInputForm();
+  }
+
+  @Then("Select simple form")
+  public void selectSimpleForm() {
+    pageObject.clickSelectSimpleForm();
+  }
+
+
+  @And("Enter randon as {string}")
+  public void enterRandonAs(String random) {
+    pageObject.inputRandom(random);
+  }
+
+  @Then("Click show message")
+  public void clickShowMessage() {
+    pageObject.clickShowMeassage();
+  }
+
+  @And("Verify message {string}")
+  public void verifyMessage(String message) {
+    Assert.assertTrue(pageObject.checkMessageDisplay(message));
+  }
+
+  @And("Enter number a as {string}")
+  public void enterNumberAAs(String a) {
+    pageObject.EnterA(a);
+  }
+
+  @And("Enter number b as {string}")
+  public void enterNumberBAs(String b) {
+    pageObject.EnterB(b);
+  }
+
+  @Then("Click get total")
+  public void clickGetTotal() {
+    pageObject.clickGetTotal();
+  }
+
 }
