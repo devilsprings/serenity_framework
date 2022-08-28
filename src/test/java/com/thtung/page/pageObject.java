@@ -15,7 +15,7 @@ public class pageObject extends PageObject {
 
   public void clickInputForms() {
     waitFor(sidebarInputForms).waitUntilVisible().click();
-//    find(By.xpath("//a[text()='Input Forms']")).click();
+    find(By.xpath("//a[text()='Input Forms']")).click();
   }
 
   public void clickSelectInputForm() {
