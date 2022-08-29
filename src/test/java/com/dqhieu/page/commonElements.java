@@ -14,10 +14,10 @@ import java.util.Random;
 
 public class commonElements extends PageObject {
 
-    @FindBy(xpath = "//a[contains(text(), 'Input Forms')]")
+    @FindBy(xpath = "//a[text()='Input Forms']")
     public WebElementFacade sb_inputForm;
 
-    @FindBy(xpath = "//a[contains(text(), 'Simple Form Demo')]")
+    @FindBy(xpath = "//a[text()='Input Forms']/..//a[text()='Simple Form Demo']")
     public WebElementFacade sb_simpleFormDemo;
 
     @FindBy(xpath = "//a[text()='No, thanks!']")
@@ -29,8 +29,8 @@ public class commonElements extends PageObject {
     @FindBy(xpath = "//button[text()='Show Message']")
     public WebElementFacade showMessageButton;
 
-//    @FindBy(xpath = "//span[@id='display' and text()='%s']")
-//    public WebElementFacade verifyMessage;
+    @FindBy(id= "display")
+    public WebElementFacade verifyMessage;
 
     @FindBy(id = "sum1")
     public WebElementFacade firstField;
@@ -80,10 +80,12 @@ public class commonElements extends PageObject {
     public void showMessage(){
         showMessageButton.waitUntilVisible().click();
     }
-    public boolean verifyMessage(String text){
-        WebElementFacade verifyMessage = $(By.xpath(String.format("//span[@id='display' and text()='%s']",text)));
-        return verifyMessage.waitUntilVisible().isVisible();
-        //return verifyMessage.waitUntilVisible().isDisplayed();
+    public boolean verifyMessage(){
+        if (verifyMessage.waitUntilVisible().isDisplayed()) {
+            System.out.println(verifyMessage.getText());
+        }
+
+        return false;
     }
     public void EnterA(String a){
         firstField.waitUntilVisible().sendKeys(a);
@@ -95,6 +97,10 @@ public class commonElements extends PageObject {
         getTotalButton.waitUntilVisible().click();
     }
     public boolean verifyTotal(){
-        return verifyGetTotal.waitUntilVisible().isDisplayed();
+        if (verifyGetTotal.waitUntilVisible().isDisplayed()){
+            System.out.println(verifyGetTotal.getText());
+        }
+        return false;
+
     }
 }
