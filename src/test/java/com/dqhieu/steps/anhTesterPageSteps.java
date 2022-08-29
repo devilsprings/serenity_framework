@@ -64,7 +64,6 @@ public class anhTesterPageSteps extends PageObject {
   @Then("Verify message display correct mapping with input data")
   public void verifyMessageDisplayCorrectMappingWithInputData(String text) {
     Assert.assertTrue(common.verifyMessage(text));
-
   }
 
   @Then("Enter number “a” in “enter a” field {string}")
@@ -87,4 +86,5 @@ public class anhTesterPageSteps extends PageObject {
     Assert.assertTrue(common.verifyTotal());
     System.out.println(common.verifyGetTotal.getText());
   }
+
 }
