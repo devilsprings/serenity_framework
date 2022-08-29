@@ -28,7 +28,7 @@ public class commonElements extends PageObject {
     @FindBy(xpath = "//button[text()='Show Message']")
     public WebElementFacade showMessageButton;
 
-    @FindBy(id = "display")
+    @FindBy(xpath = "//span[@id='display' and text()='%s']")
     public WebElementFacade verifyMessage;
 
     @FindBy(id = "sum1")
