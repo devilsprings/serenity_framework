@@ -19,7 +19,7 @@ public class commonElements extends PageObject {
     @FindBy(xpath = "//a[contains(text(), 'Simple Form Demo')]")
     public WebElementFacade sb_simpleFormDemo;
 
-    @FindBy(id = "at-cv-lightbox-close")
+    @FindBy(xpath = "//a[text()='No, thanks!']")
     public WebElementFacade closePopupBtn;
 
     @FindBy(id = "user-message")
@@ -47,19 +47,21 @@ public class commonElements extends PageObject {
         sb_inputForm.waitUntilVisible().click();
     }
 
-    public void clickSimpleForm(){
+    public void clickSimpleForm() throws Throwable {
         sb_simpleFormDemo.waitUntilVisible().click();
+        Thread.sleep(5000);
     }
 
-    public void closeAdsPopup() {
+    public void closeAdsPopup() throws Throwable {
         closePopupBtn.waitUntilVisible().click();
+        Thread.sleep(3000);
     }
 
 //    public void clickOnSidebarMenu(String sidebarMenu) {
 ////        waitFor(closePopupBtn).waitUntilNotVisible();
 //        find(By.xpath(String.format("//li[@class='tree-branch']//a[contains(text(), '%s')]", sidebarMenu))).waitUntilClickable().click();
 //    }
-    public void enterYourMessage(){
+    public void enterYourMessage() throws Throwable {
         Random generator = new Random();
         int i = generator.nextInt(99);
 
@@ -69,7 +71,9 @@ public class commonElements extends PageObject {
         Date date = new Date();
         String currentDate= dateFormat.format(date);
 
-        messageField.waitUntilVisible().sendKeys(String.format("%02d", i)+s+currentDate);
+        String message = String.format("%02d", i)+s+currentDate;
+        messageField.waitUntilVisible().sendKeys(message);
+        Thread.sleep(2000);
 
     }
     public void showMessage(){

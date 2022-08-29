@@ -26,7 +26,7 @@ public class anhTesterPageSteps extends PageObject {
   @Given("I access Anh tester website")
   public void iAccessAnhTesterWebsite() {
     openUrl(URL);
-    common.closeAdsPopup();
+    //common.closeAdsPopup();
   }
 
 
@@ -41,15 +41,17 @@ public class anhTesterPageSteps extends PageObject {
   }
 
   @And("Select simple form demo")
-  public void selectSimpleFormDemo() {
+  public void selectSimpleFormDemo() throws Throwable {
     common.clickSimpleForm();
+
   }
   @And("Close popup")
-  public void closePopup() {
+  public void closePopup() throws Throwable {
     common.closeAdsPopup();
+
   }
   @And("Input generate random two letters two numbers and current date into message field")
-  public void inputGenerateRandomTwoLettersTwoNumbersAndCurrentDateIntoMessageField(String message) {
+  public void inputGenerateRandomTwoLettersTwoNumbersAndCurrentDateIntoMessageField() throws Throwable {
     common.enterYourMessage();
 
   }
