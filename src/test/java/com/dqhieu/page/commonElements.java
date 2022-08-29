@@ -79,7 +79,7 @@ public class commonElements extends PageObject {
     public void showMessage(){
         showMessageButton.waitUntilVisible().click();
     }
-    public boolean verifyMessage(){
+    public boolean verifyMessage(String text){
         return verifyMessage.waitUntilVisible().isDisabled();
     }
     public void EnterA(String a){
