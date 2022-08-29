@@ -64,7 +64,7 @@ public class anhTesterPageSteps extends PageObject {
   @Then("Verify message display correct mapping with input data")
   public void verifyMessageDisplayCorrectMappingWithInputData(String text) {
     Assert.assertTrue(common.verifyMessage(text));
-    System.out.println(common.verifyMessage.getText());
+
   }
 
   @Then("Enter number “a” in “enter a” field {string}")

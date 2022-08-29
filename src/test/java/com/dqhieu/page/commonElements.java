@@ -1,5 +1,6 @@
 package com.dqhieu.page;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -28,8 +29,8 @@ public class commonElements extends PageObject {
     @FindBy(xpath = "//button[text()='Show Message']")
     public WebElementFacade showMessageButton;
 
-    @FindBy(xpath = "//span[@id='display' and text()='%s']")
-    public WebElementFacade verifyMessage;
+//    @FindBy(xpath = "//span[@id='display' and text()='%s']")
+//    public WebElementFacade verifyMessage;
 
     @FindBy(id = "sum1")
     public WebElementFacade firstField;
@@ -80,7 +81,9 @@ public class commonElements extends PageObject {
         showMessageButton.waitUntilVisible().click();
     }
     public boolean verifyMessage(String text){
-        return verifyMessage.waitUntilVisible().isDisabled();
+        WebElementFacade verifyMessage = $(By.xpath(String.format("//span[@id='display' and text()='%s']",text)));
+        return verifyMessage.waitUntilVisible().isVisible();
+        //return verifyMessage.waitUntilVisible().isDisplayed();
     }
     public void EnterA(String a){
         firstField.waitUntilVisible().sendKeys(a);
