@@ -2,16 +2,16 @@ Feature: Automation training
 
   Background:
     Given I access Anh tester website
-    And I click on sidebar menu "Input Forms"
+    And I click on sidebar menu Input Forms
 
   Scenario: Verify result
-    And I click on sidebar menu "Simple Form Demo"
     And Select simple form demo
-    And Input generate random 2 letters 2 numbers and current date into message field
+    And Close popup
+    And Input generate random two letters two numbers and current date into message field
     And Click show message
     Then Verify message display correct mapping with input data
-    Then Enter number “a” in “enter a” field
-    And Enter number “b” in “enter b” field
+    Then Enter number “a” in “enter a” field "11"
+    And Enter number “b” in “enter b” field "22"
     And Click get total
-    Then Verify total a+b = <result> correct
+    Then Verify total a+b is correct
 

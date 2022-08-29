@@ -12,6 +12,7 @@ import net.thucydides.core.environment.SystemEnvironmentVariables;
 import net.thucydides.core.pages.PageObject;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.junit.Assert;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class anhTesterPageSteps extends PageObject {
   private static final EnvironmentVariables environmentVariables =
@@ -28,8 +29,60 @@ public class anhTesterPageSteps extends PageObject {
     common.closeAdsPopup();
   }
 
-  @Given("I click on sidebar menu {string}")
-  public void iClickOnSidebarMenu(String menu) {
-    common.clickOnSidebarMenu(menu);
+
+
+//  @Given("I click on sidebar menu {string}")
+//  public void iClickOnSidebarMenu(String menu) {
+//    common.clickOnSidebarMenu(menu);
+//  }
+  @And("I click on sidebar menu Input Forms")
+  public void iClickOnSidebarMenuInputForms() {
+      common.clickInputForm();
+  }
+
+  @And("Select simple form demo")
+  public void selectSimpleFormDemo() {
+    common.clickSimpleForm();
+  }
+  @And("Close popup")
+  public void closePopup() {
+    common.closeAdsPopup();
+  }
+  @And("Input generate random two letters two numbers and current date into message field")
+  public void inputGenerateRandomTwoLettersTwoNumbersAndCurrentDateIntoMessageField(String message) {
+    common.enterYourMessage();
+
+  }
+
+  @And("Click show message")
+  public void clickShowMessage() {
+    common.showMessage();
+  }
+
+  @Then("Verify message display correct mapping with input data")
+  public void verifyMessageDisplayCorrectMappingWithInputData() {
+    Assert.assertTrue(common.verifyMessage());
+    System.out.println(common.verifyMessage.getText());
+  }
+
+  @Then("Enter number “a” in “enter a” field {string}")
+  public void enterNumberAInEnterAField(String a) {
+    common.EnterA(a);
+  }
+
+  @And("Enter number “b” in “enter b” field {string}")
+  public void enterNumberBInEnterBField(String b) {
+    common.EnterB(b);
+  }
+
+  @And("Click get total")
+  public void clickGetTotal() {
+    common.getTotal();
+  }
+
+  @Then("Verify total a+b is correct")
+  public void verifyTotalABIsCorrect() {
+    Assert.assertTrue(common.verifyTotal());
+    System.out.println(common.verifyGetTotal.getText());
   }
 }
