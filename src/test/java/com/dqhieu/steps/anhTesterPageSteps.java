@@ -87,4 +87,44 @@ public class anhTesterPageSteps extends PageObject {
     common.verifyTotal();
   }
 
+
+  @Then("Enter number a {string} and Enter number b {string}")
+  public void enterNumberAAndEnterNumberB(String numbA, String numbB) {
+  }
+
+
+  @Then("Verify {string} to select checkbox demo and select radio buttons demo")
+  public void verifyToSelectCheckboxDemoAndSelectRadioButtonsDemo(String sum) {
+  }
+
+  @And("Select Input form submit")
+  public void selectInputFormSubmit() {
+    common.clickInputFormSubmit();
+  }
+
+
+  @Then("Enter email {string}")
+  public void enterEmail(String email) throws Throwable {
+    common.enterEmail(email);
+  }
+
+  @Then("Verify email no longer error")
+  public void verifyEmailNoLongerError() {
+    common.verifyEmailError();
+  }
+
+  @And("Enter phone number {string}")
+  public void enterPhoneNumber(String phoneNumb) throws Throwable {
+    common.enterPhone(phoneNumb);
+  }
+
+  @Then("Enter {string} into Project Description")
+  public void enterIntoProjectDescription(String letter) {
+    common.enterProjectDescription(letter);
+  }
+
+  @Then("Verify Project Description no longer error")
+  public void verifyProjectDescriptionNoLongerError() throws Throwable {
+    common.verifyProjectDescription();
+  }
 }
