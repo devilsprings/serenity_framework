@@ -1,26 +1,23 @@
 package com.dqhieu.steps;
 
 import com.dqhieu.page.commonElements;
-import com.dqhieu.page.inputForm.simpleFormDemo;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.environment.SystemEnvironmentVariables;
 import net.thucydides.core.pages.PageObject;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.junit.Assert;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class anhTesterPageSteps extends PageObject {
   private static final EnvironmentVariables environmentVariables =
           SystemEnvironmentVariables.createEnvironmentVariables();
   private static final String URL =
           EnvironmentSpecificConfiguration.from(environmentVariables).getProperty("url");
+  String a;
+  String b;
 
-  simpleFormDemo simpleForm;
   commonElements common;
 
   @Given("I access Anh tester website")
@@ -29,12 +26,6 @@ public class anhTesterPageSteps extends PageObject {
     //common.closeAdsPopup();
   }
 
-
-
-//  @Given("I click on sidebar menu {string}")
-//  public void iClickOnSidebarMenu(String menu) {
-//    common.clickOnSidebarMenu(menu);
-//  }
   @And("I click on sidebar menu Input Forms")
   public void iClickOnSidebarMenuInputForms() {
       common.clickInputForm();
@@ -46,7 +37,7 @@ public class anhTesterPageSteps extends PageObject {
 
   }
   @And("Close popup")
-  public void closePopup() throws Throwable {
+  public void closePopup() {
     common.closeAdsPopup();
 
   }
@@ -69,12 +60,12 @@ public class anhTesterPageSteps extends PageObject {
 
   @Then("Enter number “a” in “enter a” field {string}")
   public void enterNumberAInEnterAField(String a) {
-    common.EnterA(a);
+    common.enterFirstValue(a);
   }
 
   @And("Enter number “b” in “enter b” field {string}")
   public void enterNumberBInEnterBField(String b) {
-    common.EnterB(b);
+    common.enterSecondValue(b);
   }
 
   @And("Click get total")
@@ -89,12 +80,17 @@ public class anhTesterPageSteps extends PageObject {
 
 
   @Then("Enter number a {string} and Enter number b {string}")
-  public void enterNumberAAndEnterNumberB(String numbA, String numbB) {
+  public void enterNumberAAndEnterNumberB(String numA, String numB) {
+    this.a = numA;
+    this.b = numB;
+    common.enterFirstValue(numA);
+    common.enterSecondValue(numB);
   }
 
 
-  @Then("Verify {string} to select checkbox demo and select radio buttons demo")
-  public void verifyToSelectCheckboxDemoAndSelectRadioButtonsDemo(String sum) {
+  @Then("Verify {float} to select checkbox demo and select radio buttons demo")
+  public void verifyToSelectCheckboxDemoAndSelectRadioButtonsDemo(float sum) {
+    Assert.assertEquals(sum, Float.parseFloat(a) + Float.parseFloat(b), 0.0);
   }
 
   @And("Select Input form submit")

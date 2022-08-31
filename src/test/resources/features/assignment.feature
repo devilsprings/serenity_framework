@@ -15,19 +15,20 @@ Feature: Automation training
     And Click get total
     Then Verify total a+b is correct
 
-#  Scenario Outline: Viết theo dạng Scenario Outline hai trường hợp <a=3,b=5> and <a=3,b=3>
-#    And Select simple form demo
-#    And Close popup
-#    And Input generate random two letters two numbers and current date into message field
-#    And Click show message
-#    Then Verify message display correct mapping with input data
-#    Then Enter number a "<firstNumber>" and Enter number b "<secondNumber>"
-#    And Click get total
-#    Then Verify "<total>" to select checkbox demo and select radio buttons demo
-#    Examples:
-#      | firstNumber | secondNumber |total|
-#      | 3           | 5            |8    |
-#      | 3           | 3            |6    |
+  Scenario Outline: Calculate
+    And Select simple form demo
+    And Close popup
+    And Input generate random two letters two numbers and current date into message field
+    And Click show message
+    Then Verify message display correct mapping with input data
+    Then Enter number a "<firstNumber>" and Enter number b "<secondNumber>"
+    And Click get total
+    Then Verify <total> to select checkbox demo and select radio buttons demo
+    Examples:
+      | firstNumber | secondNumber | total  |
+      | 3           | 5            | 8      |
+      | -15         | 3            | -12    |
+      | 10.054      | 2            | 12.054 |
 
   Scenario: Try While loop
     And Select Input form submit
