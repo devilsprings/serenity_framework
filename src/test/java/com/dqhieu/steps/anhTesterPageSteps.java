@@ -58,14 +58,16 @@ public class anhTesterPageSteps extends PageObject {
 
   }
 
-  @Then("Enter number “a” in “enter a” field {string}")
-  public void enterNumberAInEnterAField(String a) {
-    common.enterFirstValue(a);
+  @Then("Enter number {string} into enter a field")
+  public void enterNumberAInEnterAField(String numberA) {
+    this.a = numberA;
+    common.enterFirstValue(numberA);
   }
 
-  @And("Enter number “b” in “enter b” field {string}")
-  public void enterNumberBInEnterBField(String b) {
-    common.enterSecondValue(b);
+  @And("Enter number {string} into enter b field")
+  public void enterNumberBInEnterBField(String numberB) {
+    this.b = numberB;
+    common.enterSecondValue(numberB);
   }
 
   @And("Click get total")
@@ -75,7 +77,7 @@ public class anhTesterPageSteps extends PageObject {
 
   @Then("Verify total a+b is correct")
   public void verifyTotalABIsCorrect() {
-    common.verifyTotal();
+    Assert.assertEquals(Float.parseFloat(common.getTotalValue()), Float.parseFloat(a) + Float.parseFloat(b), 0.0);
   }
 
 
@@ -85,12 +87,6 @@ public class anhTesterPageSteps extends PageObject {
     this.b = numB;
     common.enterFirstValue(numA);
     common.enterSecondValue(numB);
-  }
-
-
-  @Then("Verify {float} to select checkbox demo and select radio buttons demo")
-  public void verifyToSelectCheckboxDemoAndSelectRadioButtonsDemo(float sum) {
-    Assert.assertEquals(sum, Float.parseFloat(a) + Float.parseFloat(b), 0.0);
   }
 
   @And("Select Input form submit")

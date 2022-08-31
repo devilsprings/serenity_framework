@@ -10,11 +10,12 @@ Feature: Automation training
     And Input generate random two letters two numbers and current date into message field
     And Click show message
     Then Verify message display correct mapping with input data
-    Then Enter number “a” in “enter a” field "11"
-    And Enter number “b” in “enter b” field "22"
+    Then Enter number "11" into enter a field
+    And Enter number "22" into enter b field
     And Click get total
     Then Verify total a+b is correct
 
+  @calculate
   Scenario Outline: Calculate
     And Select simple form demo
     And Close popup
@@ -23,12 +24,11 @@ Feature: Automation training
     Then Verify message display correct mapping with input data
     Then Enter number a "<firstNumber>" and Enter number b "<secondNumber>"
     And Click get total
-    Then Verify <total> to select checkbox demo and select radio buttons demo
+    Then Verify total a+b is correct
     Examples:
-      | firstNumber | secondNumber | total  |
-      | 3           | 5            | 8      |
-      | -15         | 3            | -12    |
-      | 10.054      | 2            | 12.054 |
+      | firstNumber | secondNumber |
+      | 3           | 5            |
+      | -15         | -99            |
 
   Scenario: Try While loop
     And Select Input form submit

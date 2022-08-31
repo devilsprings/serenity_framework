@@ -4,6 +4,8 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,6 +14,7 @@ import java.util.Locale;
 import java.util.Random;
 
 public class commonElements extends PageObject {
+  final static Logger logger = LoggerFactory.getLogger(commonElements.class);
   @FindBy(xpath = "//a[text()='Input Forms']")
   public WebElementFacade sb_inputForm;
 
@@ -29,6 +32,9 @@ public class commonElements extends PageObject {
 
   @FindBy(id= "display")
   public WebElementFacade verifyMessage;
+
+  @FindBy(id= "displayvalue")
+  public WebElementFacade totalValue;
 
   @FindBy(id = "sum1")
   public WebElementFacade firstField;
@@ -72,7 +78,6 @@ public class commonElements extends PageObject {
 
   public void clickSimpleForm() throws Throwable {
     sb_simpleFormDemo.waitUntilVisible().click();
-    Thread.sleep(5000);
   }
 
   public void closeAdsPopup() {
@@ -99,15 +104,14 @@ public class commonElements extends PageObject {
 
     String message = String.format("%02d", i)+s+currentDate;
     messageField.waitUntilVisible().sendKeys(message);
-    Thread.sleep(2000);
-
   }
   public void showMessage(){
     showMessageButton.waitUntilVisible().click();
   }
   public boolean verifyMessage(){
     if (verifyMessage.waitUntilVisible().isDisplayed()) {
-      System.out.println(verifyMessage.getText());
+//      System.out.println(verifyMessage.getText());
+        logger.info("input message: " + verifyMessage.getText());
     }
 
     return false;
@@ -123,7 +127,8 @@ public class commonElements extends PageObject {
   }
   public boolean verifyTotal(){
     if (verifyGetTotal.waitUntilVisible().isDisplayed()){
-      System.out.println(verifyGetTotal.getText());
+//      System.out.println(verifyGetTotal.getText());
+      logger.info("input message: " + verifyMessage.getText());
     }
     return false;
 
@@ -170,7 +175,8 @@ public class commonElements extends PageObject {
   public void enterProjectDescription(String letter){
     projectDescription.waitUntilVisible().sendKeys(letter);
     projectDescriptionError.waitUntilVisible().isDisplayed();
-    System.out.println(projectDescriptionError.getText());
+//    System.out.println(projectDescriptionError.getText());
+    logger.info("error: " + projectDescriptionError.getText());
   }
   public void verifyProjectDescription() throws Throwable {
     int n = 2;
@@ -180,5 +186,11 @@ public class commonElements extends PageObject {
     }
     Thread.sleep(5000);
     projectDescriptionError.waitUntilNotVisible();
+  }
+
+  public String getTotalValue() {
+    String sum = waitFor(totalValue).waitUntilVisible().getText();
+    logger.info("Total: " + sum);
+    return sum;
   }
 }
