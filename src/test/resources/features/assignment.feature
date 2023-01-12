@@ -6,8 +6,10 @@ Feature: Assignment
     And I submit my answer
     Then I should see "Have a nice day." message display
     Then I click Prev button
-    And The "Bad" button should be clicked
-    And The "Good" button and "Okay" button should not be clicked
+    And The <Clicked Button> button should be clicked
+    And The <Not Clicked 1> button and <Not Clicked 2> button should not be clicked
     Examples:
-      | Answer |
-      | "Bad"  |
+      | Answer |Clicked Button|Not Clicked 1|Not Clicked 2|
+      | "Bad"  |"Bad"         |"Good"       |"Okay"       |
+      | "Good" |"Good"        |"Bad"        |"Okay"       |
+      | "Okay" |"Okay"        |"Bad"        |"Good"       |

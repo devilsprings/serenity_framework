@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json" },
     features = "src/test/resources/features/assignment.feature",
-    glue = {"com.dqhieu"}),
-    monochrome = true
+    glue = {"com.dqhieu"},
+    monochrome = true)
 
 public class demoTestSuite {}
