@@ -6,8 +6,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-    plugin = {"pretty"},
+    plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json" },
     features = "src/test/resources/features/assignment.feature",
-    glue = {"com.dqhieu"})
+    glue = {"com.dqhieu"}),
+    monochrome = true
 
 public class demoTestSuite {}
