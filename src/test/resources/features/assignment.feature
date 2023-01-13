@@ -1,5 +1,6 @@
 Feature: Assignment
 
+  @SP-2
   Scenario Outline: User answer survey question
     Given I open the survey Monkey page
     When I choose answer <Answer>
