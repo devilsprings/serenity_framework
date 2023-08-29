@@ -18,6 +18,9 @@ public class pageObject extends PageObject {
 //    find(By.xpath("//a[text()='Input Forms']")).click();
 //  }
 
+  public void waitAbit(int millisecond) {
+    waitABit(millisecond);
+  }
   public void clickSelectInputForm() {
     WebElementFacade btnInputForm = $(By.xpath("//a[text()='Input Forms']"));
 
@@ -31,6 +34,8 @@ public class pageObject extends PageObject {
     btnSimpleForm.waitUntilVisible().click();
     Thread.sleep(5000);
   }
+
+
   public void closePopup() throws Throwable {
     WebElementFacade btnPopup = $(By.id("at-cv-lightbox-close"));
 //    scrollIntoView(getDriver(), btnNext);
@@ -69,4 +74,8 @@ public class pageObject extends PageObject {
 //    scrollIntoView(getDriver(), btnNext);
     btnGetTotal.waitUntilVisible().click();
   }
+
+
+
+
 }
