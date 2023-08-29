@@ -18,4 +18,6 @@ public class homePageStep {
         homePage.clickCloseAds();
         homePage.waitAbit(20000);
     }
+
+
 }

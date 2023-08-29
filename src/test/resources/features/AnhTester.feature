@@ -2,7 +2,7 @@ Feature: TestWeb www.kingpower.com
   Scenario: Verify result
     Given Go to Anhtester web
     When click close ads
-    
+
 
 
 
